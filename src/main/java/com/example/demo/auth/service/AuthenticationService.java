@@ -26,11 +26,12 @@ public class AuthenticationService {
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .userName(request.getUsername())
+                .username(request.getUsername())
                 .role(Role.USER)
                 .build();
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
+        System.out.println(jwtToken);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
